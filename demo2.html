@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>学习Vue！！（实现配置路由）</title>
+	<style type="text/css">
+	a{text-decoration:none;}
+	a:link {color: #000;}<!--/**链接的颜色**/-->
+	a:visited {color: #000;}<!--/**已访问过颜色**/-->
+	a:hover {color: #000; }<!--/**鼠标经过颜色**/-->
+	a:active {color: #000;}<!--/**活动链接颜色**/-->
+	nav{color:black;margin-bottom:10px;}
+	span{margin-right:10px;}
+	summary{padding:8px 0px 5px 0px;font-size:16px;font-weight:bold;color:blue;}
+	</style>
+</head>
+
+<body>
+<div id='app'>
+<h1>我的个人博客</h1>
+<nav>
+<!-- 使用 router-link 组件来导航. -->
+<router-link to="/jquery"><span>JQuery专栏</span></router-link>  <!--to对应的是下面path的参数请求--->
+<router-link to="/nodejs"><span>NodeJs专栏</span></router-link>
+<router-link to="/reactjs"><span>ReactJs专栏</span></router-link>
+<router-link to="/vuejs"><span>VueJs专栏</span></router-link>
+</nav>
+ <!-- 路由出口 -->
+  <!-- 路由匹配到的组件将渲染在这里 -->
+<router-view></router-view>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+// 1. 定义（路由）组件。
+const Jquery={template:'<div><article><summary>JQuery描述</summary><detail>jQuery 是一个 JavaScript 库。<br>jQuery 极大地简化了 JavaScript 编程。<br>jQuery 很容易学习。</detail><summary>jQuery 实例</summary><detail>jQuery 语法实例:$(this).hide()演示 jQuery 的 hide() 函数，隐藏当前的 HTML 元素。<br> $("p").hide()演示 jQuery 的 hide() 函数，隐藏所有p元素。<br> $(".test").hide()演示 jQuery 的 hide() 函数，隐藏所有 class="test" 的元素。<br> $("#test").hide()演示 jQuery 的 hide() 函数，隐藏 id="test" 的元素。</detail><summary>jQuery 参考手册</summary><detail>在 W3School，您将找到包含所有 jQuery 对象和函数的完整参考手册。</article></div>'}
+const Nodejs={template:'<div><article><summary>NodeJs专栏</summary><detail>NodeJs 是一个 JavaScript 运行环境。<br>NodeJs 极大地简化了 JavaScript 编程。</detail></article></div>'}
+const Reactjs={template:'<div><article><summary>ReactJs专栏</summary><detail>ReactJs 是一个 JavaScript 框架。<br>ReactJs 极大地简化了 JavaScript 编程。</detail></article></div>'}
+const Vuejs={template:'<div><article><summary>VueJs专栏</summary><detail>VueJs 是一个 JavaScript 框架。<br>VueJs 极大地简化了 JavaScript 编程。</detail></article></div>'}
+// 2. 定义路由
+const routes=[
+{path:'/jquery',component:Jquery},
+{path:'/nodejs',component:Nodejs},
+{path:'/reactjs',component:Reactjs},
+{path:'/vuejs',component:Vuejs}
+]
+
+// 3. 创建 router 实例，然后传 `routes` 配置
+const router=new VueRouter({
+routes
+})
+
+// 4. 创建和挂载根实例
+const app=new Vue({
+router
+}).$mount('#app')
+</script>
+</html>

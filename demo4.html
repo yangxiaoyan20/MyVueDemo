@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>学习Vue！！（实现嵌套路由）</title>
+	<style> 
+.div-left{ float:left;width:20%;border:1px solid #F00} 
+.div-right{ float:left;width:79%;border:1px solid #000} 
+.line{margin: 10px 8px 10px 6px;border-top:1px dotted #C0C0C0;}
+article{margin-top:24px;}
+h5{margin-left:15px;}
+</style> 
+</head>
+
+<body>
+<div id='app'>
+<div class="div-left"><!--左边栏--->
+<ul>
+<router-link to="/menuList/FE/FE"><h3>前端开发</h3></router-link>
+<router-link to="/menuList/FE/html5"><h5>HTML5</h5></router-link>
+<router-link to="/menuList/FE/Javascipt"><h5>Javascipt</h5></router-link>
+<router-link to="/menuList/FE/CSS"><h5>CSS</h5></router-link>
+<router-link to="/menuList/FE/ReactJs"><h5>ReactJs</h5></router-link>
+<router-link to="/menuList/FE/NodeJs"><h5>NodeJs</h5></router-link>
+<router-link to="/menuList/FE/VueJs"><h5>VueJs</h5></router-link>
+<router-link to="/menuList/HE/HE"><h3>后端开发</h3></router-link>
+<router-link to="/menuList/HE/Java"><h5>Java</h5></router-link>
+<router-link to="/menuList/HE/C++"><h5>C++</h5></router-link>
+<router-link to="/menuList/HE/C"><h5>C语言</h5></router-link>
+<router-link to="/menuList/HE/Python"><h5>Python</h5></router-link>
+</ul>
+
+</div>
+<router-view></router-view>
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+const DataNav={
+template:'<div class="div-right"><h2>标题:{{$route.params.name}}</h2><router-view></router-view></div>'
+}
+
+const FEHome={template:'<div>前端开发列表</div>'}
+const DataNavHTML={template:'<div><article>html5专题<div class="line"></div><detail>万维网的核心语言、标准通用标记语言下的一个应用超文本标记语言（HTML）的第五次重大修改。2014年10月29日，万维网联盟宣布，经过接近8年的艰苦努力，该标准规范终于制定完成。</detail></article><article>html5基础<div class="line"></div> <detail>HTML5 将成为 HTML、XHTML 以及 HTML DOM 的新标准。<br> HTML 的上一个版本诞生于 1999 年。自从那以后，Web 世界已经经历了巨变。<br>HTML5 仍处于完善之中。然而，大部分现代浏览器已经具备了某些 HTML5 支持。</detail></article><article>html5进阶<div class="line"></div> <detail>HTML5 提供了两种在客户端存储数据的新方法：<br> localStorage - 没有时间限制的数据存储 <br> sessionStorage - 针对一个 session 的数据存储</detail></article><article>html5高级<div class="line"></div> <detail>Server-Sent 事件 - 单向消息传递: Server-Sent 事件指的是网页自动获取来自服务器的更新。以前也可能做到这一点，前提是网页不得不询问是否有可用的更新。通过服务器发送事件，更新能够自动到达。</detail></article></div>'}
+const DataNavJavascript={template:'<div>Javascript专题</div>'}
+const DataNavCSS={template:'<div>Css专题</div>'}
+const DataNavReactJs={template:'<div>ReactJs专题</div>'}
+const DataNavNodeJs={template:'<div>NodeJs专题</div>'}
+const DataNavVueJs={template:'<div>VueJs专题</div>'}
+const HEHome={template:'<div>后端开发列表</div>'}
+const HEJava={template:'<div>Java专题</div>'}
+const HEC1={template:'<div>C++专题</div>'}
+const HEC={template:'<div>C语言专题</div>'}
+const HEPython={template:'<div>Python专题</div>'}
+
+const router=new VueRouter({
+routes:[
+{path:'/menuList/:name',component:DataNav,
+children:[                       //children 配置就是像 routes 配置一样的路由配置数组，所以呢，你可以嵌套多层路由
+ { path: 'FE', component: FEHome },
+ { path: 'html5', component: DataNavHTML },
+ { path: 'Javascipt', component: DataNavJavascript },
+ { path: 'CSS', component: DataNavCSS },
+ { path: 'ReactJs', component: DataNavReactJs },
+ { path: 'NodeJs', component: DataNavNodeJs },
+ { path: 'VueJs', component: DataNavVueJs },
+ { path: 'HE', component: HEHome },
+ { path: 'Java', component: HEJava },
+ { path: 'C++', component: HEC1 },
+ { path: 'C', component: HEC },
+ { path: 'Python', component: HEPython },
+]
+}
+]
+})
+
+const app=new Vue({router}).$mount('#app')
+</script>
+</html>

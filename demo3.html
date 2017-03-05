@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>学习Vue！！（实现动态路由匹配）</title>
+</head>
+
+<body>
+<div id='app'>
+<p>
+<router-link to="/user/jquery">jQuery</router-link>
+<router-link to="/user/javascript">javascript</router-link>
+</p>
+<p>
+<router-link to="/user/foo/password/12345678">foo</router-link>
+<router-link to="/user/evan/password/646684255">evan</router-link>
+</p>
+<router-view></router-view>
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+//定义组件
+const User={
+template:'<div>专栏:{{$route.params.id}} </div>'
+}
+const UserInfo={
+template:'<div>用户:{{$route.params.username}} <br>密码:{{$route.params.password_id}}</div>'
+}
+
+//加载参数
+const router=new VueRouter({
+routes:[
+//动态路径参数，以冒号开头
+{path:'/user/:id',component:User},
+{path:'/user/:username/password/:password_id',component:UserInfo}
+]
+})
+
+//渲染
+const app=new Vue({router}).$mount('#app')
+</script>
+</html>

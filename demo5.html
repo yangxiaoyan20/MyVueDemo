@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>学习Vue！！（实现命名路由）</title>
+</head>
+
+<body>
+<div id='app'>
+<p>
+<router-link :to="{name:'yangyang',params:{userId:123}}">User1</router-link>
+<router-link :to="{name:'linlin',params:{userId:987}}">User2</router-link>
+</p>
+<router-view></router-view>
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+const User={
+template:"<div> <p>用户名：{{$route.name}}</p><p>用户密码：{{$route.params.userId}}</p></div>"
+}
+
+const router=new VueRouter({
+routes:[
+{ path:'/user:userId',name:'yangyang',component:User },
+{ path:'/user:userId',name:'linlin',component:User }
+]
+})
+
+const app=new Vue({router}).$mount('#app')
+</script>
+</html>
